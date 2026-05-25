@@ -1,0 +1,36 @@
+# Beatport tag-to-genre mappings.
+#
+# Beatport's literal genre bucket names — the strings their MP3 downloads
+# tag the `Genre` ID3 frame with. Includes compound names with slashes/
+# parens that would otherwise split incorrectly when the categorizer
+# tokenizes a tag string.
+#
+# Generic short names ("house", "techno", "dubstep") live in generic.yaml.
+# This file covers Beatport's compound-bucket names.
+#
+# Source list: https://www.beatport.com/genres (2026-05)
+
+version: 1
+source: Beatport
+
+mappings:
+  "140 / deep dubstep / grime": 140 / Deep Dubstep / Grime
+  "bass / club": Bass / Club
+  "breaks / breakbeat / uk bass": Breaks / Breakbeat / UK Bass
+  "dance / pop": Europop
+  "dj tools / acapellas": DJ Tools
+  "electro (classic / detroit / modern)": Electro (Classic / Detroit / Modern)
+  "hard dance / hardcore / neo rave": Hard Dance / Hardcore / Neo Rave
+  "indie dance": Indie Dance
+  "jackin house": House
+  "melodic house & techno": Melodic House & Techno
+  "minimal / deep tech": Minimal / Deep Tech
+  "nu disco / disco": Nu Disco / Disco
+  "organic house": Organic House
+  "psy-trance": Psy-Trance
+  "techno (peak time / driving)": Techno (Peak Time / Driving)
+  "techno (raw / deep / hypnotic)": Techno (Raw / Deep / Hypnotic)
+  "trance (main floor)": Trance (Main Floor)
+  "trance (raw / deep / hypnotic)": Trance (Raw / Deep / Hypnotic)
+  "trap / future bass": Trap / Future Bass
+  "uk garage / bassline": UK Garage / Bassline

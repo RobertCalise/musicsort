@@ -1,0 +1,342 @@
+# musicsort canonical genre list.
+#
+# This file is the *source of truth* for which folders/playlists exist in
+# the library. Source-specific tag-to-genre mappings live in `genres/*.yaml`
+# (one file per source: generic, beatport, apple, bandcamp, …). The
+# categorizer unions all mapping files at load time, with most-specific
+# alias winning. Adding support for a new tag source (Discogs,
+# Traxsource, etc.) is a single new file, no code changes.
+#
+# Schema:
+#   version: int
+#   categories:
+#     - name: str             # Rekordbox playlist display name — human-readable.
+#                             # E.g. "Tech House" (not "Tech_House").
+#       folder: str           # On-disk subdirectory name under Songs/.
+#                             # Filesystem-safe: underscores, no slashes/parens.
+#       family: str           # optional — Rekordbox sidebar folder grouping.
+#                             # When set, the playlist is nested under
+#                             # Genres/<family>/ in Rekordbox. Used by EDM
+#                             # subgenre families (House: 13 subs, Bass: 7
+#                             # subs, etc.) for rollup browsing.
+#       when:                 # optional gating against other tag fields
+#         year_lt: int        #   match only if year tag present and < this
+#         year_gte: int       #   match only if year tag present and >= this
+#       manual_only: bool     # if true, hits route to quarantine, never auto-
+#                             # shelved. For DJ tools / non-music / specials.
+#
+# Matching rules (enforced by the categorizer):
+#   - PRIMARY GENRE = the longest matching alias across all source files
+#     wins. Ties on alias length → AMBIGUOUS quarantine.
+#   - SECONDARY GENRES = all other matching aliases, de-duped by category.
+#     Drain adds the track to up to `rekordbox_playlist_fanout` playlists
+#     (default 3 = primary + 2 secondaries).
+#   - DECADE PLAYLIST = derived from year tag, orthogonal to genre fanout.
+#     Pre-2000 → "80s" / "90s"; 2000+ → "2000s" / "2010s" / etc.
+
+version: 2
+
+categories:
+
+  # ====================================================================
+  # === HOUSE FAMILY ===
+  # Beatport-shaped subgenre splits. House (general) and House Classics
+  # mirror each other's aliases with a year cutoff at 2000.
+  # ====================================================================
+
+  - name: "House"
+    folder: House
+    family: "House"
+    when:
+      year_gte: 2000
+
+  - name: "House Classics"
+    folder: House_Classics
+    family: "House"
+    when:
+      year_lt: 2000
+
+  - name: "Progressive House"
+    folder: Progressive_House
+    family: "House"
+
+  - name: "Future House"
+    folder: Future_House
+    family: "House"
+
+  - name: "Melodic House & Techno"
+    folder: Melodic_House_Techno
+    family: "House"
+
+  - name: "Afro House"
+    folder: Afro_House
+    family: "House"
+
+  - name: "Tropical House"
+    folder: Tropical_House
+    family: "House"
+
+  - name: "Organic House"
+    folder: Organic_House
+    family: "House"
+
+  - name: "Tech House"
+    folder: Tech_House
+    family: "House"
+
+  - name: "Minimal / Deep Tech"
+    folder: Tech_House_Minimal
+    family: "House"
+
+  - name: "Bass House"
+    folder: Bass_House
+    family: "House"
+
+  - name: "Indie Dance"
+    folder: Indie_Dance
+    family: "House"
+
+  - name: "Nu Disco / Disco"
+    folder: Disco_NuDisco
+    family: "House"
+
+  # ====================================================================
+  # === TECHNO FAMILY ===
+  # ====================================================================
+
+  - name: "Techno (Peak Time / Driving)"
+    folder: Techno_PeakTime
+    family: "Techno"
+
+  - name: "Techno (Raw / Deep / Hypnotic)"
+    folder: Techno_RawDeep
+    family: "Techno"
+
+  - name: "Hard Techno"
+    folder: Techno_Hard
+    family: "Techno"
+
+  # ====================================================================
+  # === TRANCE FAMILY ===
+  # ====================================================================
+
+  - name: "Trance (Main Floor)"
+    folder: Trance_MainFloor
+    family: "Trance"
+
+  - name: "Trance (Raw / Deep / Hypnotic)"
+    folder: Trance_RawDeep
+    family: "Trance"
+
+  - name: "Psy-Trance"
+    folder: Psy_Trance
+    family: "Trance"
+
+  # ====================================================================
+  # === BASS FAMILY ===
+  # ====================================================================
+
+  - name: "Bass / Club"
+    folder: Bass_Club
+    family: "Bass"
+
+  - name: "140 / Deep Dubstep / Grime"
+    folder: Dubstep_Deep
+    family: "Bass"
+
+  - name: "Dubstep"
+    folder: Dubstep
+    family: "Bass"
+
+  - name: "Drum & Bass"
+    folder: DnB
+    family: "Bass"
+
+  - name: "UK Garage / Bassline"
+    folder: UK_Garage_Bassline
+    family: "Bass"
+
+  - name: "Trap / Future Bass"
+    folder: Trap_FutureBass
+    family: "Bass"
+
+  - name: "Breaks / Breakbeat / UK Bass"
+    folder: Breaks
+    family: "Bass"
+
+  # ====================================================================
+  # === OTHER ELECTRONIC FAMILY ===
+  # ====================================================================
+
+  - name: "Electro (Classic / Detroit / Modern)"
+    folder: Electro
+    family: "Other Electronic"
+
+  - name: "Electronica"
+    folder: Electronica
+    family: "Other Electronic"
+
+  - name: "Downtempo"
+    folder: Downtempo
+    family: "Other Electronic"
+
+  - name: "Ambient / Experimental"
+    folder: Ambient_Experimental
+    family: "Other Electronic"
+
+  - name: "Hard Dance / Hardcore / Neo Rave"
+    folder: Hard_Dance
+    family: "Other Electronic"
+
+  - name: "Mainstage"
+    folder: Mainstage
+    family: "Other Electronic"
+
+  # ====================================================================
+  # === REGIONAL FAMILY ===
+  # ====================================================================
+
+  - name: "Europop"
+    folder: Europop
+    family: "Regional"
+
+  - name: "Eurodance"
+    folder: Eurodance
+    family: "Regional"
+
+  - name: "Amapiano"
+    folder: Amapiano
+    family: "Regional"
+
+  - name: "Afrobeats"
+    folder: Afrobeats
+    family: "Regional"
+
+  - name: "Brazilian Funk"
+    folder: Brazilian_Funk
+    family: "Regional"
+
+  - name: "Latin Electronic"
+    folder: Latin_Electronic
+    family: "Regional"
+
+  # ====================================================================
+  # === POP ===
+  # ====================================================================
+
+  - name: "Pop"
+    folder: Pop_Modern
+    when:
+      year_gte: 2000
+
+  - name: "Pop (80s/90s)"
+    folder: Pop_80s_90s
+    when:
+      year_lt: 2000
+
+  - name: "Pop Punk"
+    folder: Pop_Punk
+
+  # ====================================================================
+  # === HIP-HOP / R&B ===
+  # ====================================================================
+
+  - name: "Hip-Hop"
+    folder: Hip_Hop
+
+  - name: "Hip-Hop Trap"
+    folder: Hip_Hop_Trap
+
+  - name: "R&B / Soul"
+    folder: R_and_B
+
+  - name: "Funk"
+    folder: Funk
+
+  # ====================================================================
+  # === ROCK / METAL / PUNK ===
+  # Metal and Punk are dedicated buckets (split from Rock and Pop Punk).
+  # ====================================================================
+
+  - name: "Rock"
+    folder: Rock
+
+  - name: "Alternative Rock"
+    folder: Alternative_Rock
+
+  - name: "Soft Rock"
+    folder: Soft_Rock
+
+  - name: "Piano Rock"
+    folder: Piano_Rock
+
+  - name: "Metal"
+    folder: Metal
+
+  - name: "Punk"
+    folder: Punk
+
+  # ====================================================================
+  # === OTHER ===
+  # ====================================================================
+
+  - name: "Blues"
+    folder: Blues
+
+  - name: "Reggae"
+    folder: Reggae
+
+  - name: "Lo-Fi"
+    folder: Lo_Fi
+
+  - name: "Country"
+    folder: Country
+
+  - name: "Jazz"
+    folder: Jazz
+
+  - name: "Classical"
+    folder: Classical
+
+  - name: "Folk"
+    folder: Folk
+
+  - name: "Christian / Gospel"
+    folder: Christian_Gospel
+    # Devotional / worship / Christian rock / gospel all land here.
+    # Kept as one bucket rather than splitting into Apple's 11 subgenres —
+    # this taxonomy isn't doing aggressive splits outside the EDM spine.
+
+  - name: "Acoustic"
+    folder: Acoustic
+    # Acoustic spans genres — acoustic covers of hip-hop, pop, rock all
+    # belong here, not under Folk. Distinct from Folk by instrumentation/
+    # arrangement, not by genre family.
+
+  - name: "Latin"
+    folder: Latin
+
+  - name: "World"
+    folder: World
+
+  - name: "Soundtrack"
+    folder: Soundtrack
+
+  # ====================================================================
+  # === SPECIALS — never auto-shelve ===
+  # ====================================================================
+
+  - name: "Acapellas"
+    folder: Acapellas
+    manual_only: true
+
+  - name: "DJ Tools"
+    folder: DJ_Tools
+    manual_only: true
+
+  - name: "Non-Music"
+    folder: Non_Music
+    manual_only: true
+    # Catches podcasts, audiobooks, comedy, kids, spoken word, sound
+    # effects, etc. so non-music content doesn't accidentally route into
+    # the DJ library. Files always quarantine for manual handling.

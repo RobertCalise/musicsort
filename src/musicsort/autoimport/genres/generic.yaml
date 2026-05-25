@@ -1,0 +1,467 @@
+# Generic tag-to-genre mappings.
+#
+# Canonical aliases that any source might write into ID3 — bare genre
+# names, common variants, casing/spacing/hyphenation alternatives.
+# Source-specific compound names (e.g. Beatport's "Techno (Peak Time /
+# Driving)") live in their respective files; this file covers the basics.
+#
+# Format: `<tag>: <category name>`. Tag matching is case- and whitespace-
+# insensitive; the case here is purely cosmetic. Category names must
+# match a `name:` in genres.yaml exactly.
+
+version: 1
+source: Generic
+
+mappings:
+
+  # --- House family ---
+  # Aliases shared between House (year >= 2000) and House Classics (< 2000)
+  # use the list form so both categories pick up the alias. The
+  # categorizer's `when:` year predicate disambiguates at match time.
+  house: [House, House Classics]
+  "deep house": [House, House Classics]
+  "soulful house": [House, House Classics]
+  "funky house": [House, House Classics]
+  "jackin house": [House, House Classics]
+  "jackin' house": [House, House Classics]
+  "latin house": [House, House Classics]
+  "garage house": [House, House Classics]
+  "diva house": [House, House Classics]
+  "disco house": [House, House Classics]
+  # House Classics-only (explicit "classic" / "old school" cues)
+  "classic house": House Classics
+  "house classics": House Classics
+  "old school house": House Classics
+  "progressive house": Progressive House
+  "prog house": Progressive House
+  "future house": Future House
+  "melodic house": Melodic House & Techno
+  "melodic techno": Melodic House & Techno
+  "afro house": Afro House
+  "afro tech": Afro House
+  "tropical house": Tropical House
+  "organic house": Organic House
+  "tech house": Tech House
+  tech-house: Tech House
+  techhouse: Tech House
+  "minimal house": Minimal / Deep Tech
+  microhouse: Minimal / Deep Tech
+  "minimal tech": Minimal / Deep Tech
+  "deep tech": Minimal / Deep Tech
+  "bass house": Bass House
+  "indie dance": Indie Dance
+  "alternative dance": Indie Dance
+  "nu disco": Nu Disco / Disco
+  nu-disco: Nu Disco / Disco
+  disco: Nu Disco / Disco
+
+  # --- Techno family ---
+  techno: Techno (Peak Time / Driving)
+  "peak time techno": Techno (Peak Time / Driving)
+  "peak-time techno": Techno (Peak Time / Driving)
+  "driving techno": Techno (Peak Time / Driving)
+  "raw techno": Techno (Raw / Deep / Hypnotic)
+  "deep techno": Techno (Raw / Deep / Hypnotic)
+  "hypnotic techno": Techno (Raw / Deep / Hypnotic)
+  "dub techno": Techno (Raw / Deep / Hypnotic)
+  "industrial techno": Techno (Raw / Deep / Hypnotic)
+  "hard techno": Hard Techno
+
+  # --- Trance family ---
+  trance: Trance (Main Floor)
+  "uplifting trance": Trance (Main Floor)
+  "vocal trance": Trance (Main Floor)
+  "progressive trance": Trance (Main Floor)
+  "raw trance": Trance (Raw / Deep / Hypnotic)
+  "deep trance": Trance (Raw / Deep / Hypnotic)
+  "hypnotic trance": Trance (Raw / Deep / Hypnotic)
+  "psy-trance": Psy-Trance
+  "psy trance": Psy-Trance
+  psytrance: Psy-Trance
+  "goa trance": Psy-Trance
+  "psychedelic trance": Psy-Trance
+
+  # --- Bass family ---
+  "bass club": Bass / Club
+  "uk bass": Bass / Club
+  "jersey club": Bass / Club
+  "baltimore club": Bass / Club
+  "club music": Bass / Club
+  "deep dubstep": 140 / Deep Dubstep / Grime
+  grime: 140 / Deep Dubstep / Grime
+  dubstep: Dubstep
+  brostep: Dubstep
+  riddim: Dubstep
+  "post-dubstep": Dubstep
+  "drum & bass": Drum & Bass
+  "drum and bass": Drum & Bass
+  "drum n bass": Drum & Bass
+  dnb: Drum & Bass
+  "d&b": Drum & Bass
+  "liquid funk": Drum & Bass
+  neurofunk: Drum & Bass
+  jungle: Drum & Bass
+  "uk garage": UK Garage / Bassline
+  ukg: UK Garage / Bassline
+  "2-step": UK Garage / Bassline
+  "speed garage": UK Garage / Bassline
+  bassline: UK Garage / Bassline
+  "future garage": UK Garage / Bassline
+  "future bass": Trap / Future Bass
+  breaks: Breaks / Breakbeat / UK Bass
+  breakbeat: Breaks / Breakbeat / UK Bass
+  "big beat": Breaks / Breakbeat / UK Bass
+  "broken beat": Breaks / Breakbeat / UK Bass
+  "nu skool breaks": Breaks / Breakbeat / UK Bass
+
+  # --- Other Electronic family ---
+  electro: Electro (Classic / Detroit / Modern)
+  "detroit electro": Electro (Classic / Detroit / Modern)
+  "modern electro": Electro (Classic / Detroit / Modern)
+  "electro house": Electro (Classic / Detroit / Modern)
+  electronica: Electronica
+  electronic: Electronica
+  idm: Electronica
+  "intelligent dance music": Electronica
+  downtempo: Downtempo
+  "chill out": Downtempo
+  chillout: Downtempo
+  "chill-out": Downtempo
+  "trip hop": Downtempo
+  "trip-hop": Downtempo
+  ambient: Ambient / Experimental
+  experimental: Ambient / Experimental
+  "dark ambient": Ambient / Experimental
+  drone: Ambient / Experimental
+  "new age": Ambient / Experimental
+  "hard dance": Hard Dance / Hardcore / Neo Rave
+  hardstyle: Hard Dance / Hardcore / Neo Rave
+  hardcore: Hard Dance / Hardcore / Neo Rave
+  "happy hardcore": Hard Dance / Hardcore / Neo Rave
+  "uk hardcore": Hard Dance / Hardcore / Neo Rave
+  gabber: Hard Dance / Hardcore / Neo Rave
+  "hands up": Hard Dance / Hardcore / Neo Rave
+  "hands-up": Hard Dance / Hardcore / Neo Rave
+  euphoric: Hard Dance / Hardcore / Neo Rave
+  "neo rave": Hard Dance / Hardcore / Neo Rave
+  mainstage: Mainstage
+  "big room": Mainstage
+  "big room house": Mainstage
+  edm: Mainstage
+  complextro: Mainstage
+  "dutch house": Mainstage
+
+  # --- Regional family ---
+  europop: Europop
+  "euro pop": Europop
+  "euro-pop": Europop
+  "italo dance": Europop
+  "italo disco": Europop
+  "french pop": Europop
+  "german pop": Europop
+  schlager: Europop
+  eurodance: Eurodance
+  eurobeat: Eurodance
+  "hi-nrg": Eurodance
+  "90s dance": Eurodance
+  "euro house": Eurodance
+  amapiano: Amapiano
+  afrobeats: Afrobeats
+  afrobeat: Afrobeats
+  "afro-beat": Afrobeats
+  "afro-pop": Afrobeats
+  "afro pop": Afrobeats
+  afrofusion: Afrobeats
+  "afro-fusion": Afrobeats
+  alte: Afrobeats
+  afroswing: Afrobeats
+  "brazilian funk": Brazilian Funk
+  "baile funk": Brazilian Funk
+  "funk carioca": Brazilian Funk
+  "funk brasileiro": Brazilian Funk
+  "latin electronic": Latin Electronic
+  "latin urban": Latin Electronic
+  reggaeton: Latin Electronic
+  moombahton: Latin Electronic
+
+  # --- Pop ---
+  # Aliases shared between Pop (>= 2000) and Pop (80s/90s) (< 2000) use
+  # the list form. `oldies` and `new wave` are explicit pre-2000 cues.
+  pop: [Pop, Pop (80s/90s)]
+  "synth-pop": [Pop, Pop (80s/90s)]
+  synthpop: [Pop, Pop (80s/90s)]
+  "synth pop": [Pop, Pop (80s/90s)]
+  "indie pop": Pop
+  "art pop": Pop
+  "electro pop": Pop
+  electropop: Pop
+  britpop: Pop
+  "alternative pop": Pop
+  "teen pop": Pop
+  "k-pop": Pop
+  kpop: Pop
+  "j-pop": Pop
+  jpop: Pop
+  "c-pop": Pop
+  oldies: Pop (80s/90s)
+  "new wave": Pop (80s/90s)
+  "pop punk": Pop Punk
+  "pop-punk": Pop Punk
+  "emo pop": Pop Punk
+  "neon pop": Pop Punk
+  easycore: Pop Punk
+
+  # --- Hip-Hop / R&B / Funk ---
+  "hip-hop": Hip-Hop
+  "hip hop": Hip-Hop
+  hiphop: Hip-Hop
+  rap: Hip-Hop
+  "rap music": Hip-Hop
+  "boom bap": Hip-Hop
+  "east coast rap": Hip-Hop
+  "west coast rap": Hip-Hop
+  "gangsta rap": Hip-Hop
+  "alternative hip-hop": Hip-Hop
+  "underground hip-hop": Hip-Hop
+  "old school rap": Hip-Hop
+  "g-funk": Hip-Hop
+  trap: Hip-Hop Trap
+  "hip-hop trap": Hip-Hop Trap
+  "hip hop trap": Hip-Hop Trap
+  "trap music": Hip-Hop Trap
+  "latin trap": Hip-Hop Trap
+  "uk drill": Hip-Hop Trap
+  "brooklyn drill": Hip-Hop Trap
+  drill: Hip-Hop Trap
+  "trap rap": Hip-Hop Trap
+  "r&b": R&B / Soul
+  rnb: R&B / Soul
+  "r and b": R&B / Soul
+  "rhythm and blues": R&B / Soul
+  soul: R&B / Soul
+  "contemporary r&b": R&B / Soul
+  "neo-soul": R&B / Soul
+  "neo soul": R&B / Soul
+  "new jack swing": R&B / Soul
+  motown: R&B / Soul
+  "doo wop": R&B / Soul
+  "doo-wop": R&B / Soul
+  funk: Funk
+  "p-funk": Funk
+  "psychedelic funk": Funk
+  "funk fusion": Funk
+  "funk rock": Funk
+  "deep funk": Funk
+
+  # --- Rock / Metal / Punk ---
+  rock: Rock
+  "classic rock": Rock
+  "hard rock": Rock
+  "rock & roll": Rock
+  "rock and roll": Rock
+  "arena rock": Rock
+  "british invasion": Rock
+  "garage rock": Rock
+  "glam rock": Rock
+  "psychedelic rock": Rock
+  "roots rock": Rock
+  "southern rock": Rock
+  "stoner rock": Rock
+  "surf rock": Rock
+  "prog rock": Rock
+  "progressive rock": Rock
+  "art rock": Rock
+  "alternative rock": Alternative Rock
+  "alt rock": Alternative Rock
+  "alt-rock": Alternative Rock
+  alternative: Alternative Rock
+  "indie rock": Alternative Rock
+  "college rock": Alternative Rock
+  "post-punk": Alternative Rock
+  "post-rock": Alternative Rock
+  grunge: Alternative Rock
+  shoegaze: Alternative Rock
+  "dream pop": Alternative Rock
+  "soft rock": Soft Rock
+  "adult album alternative": Soft Rock
+  "yacht rock": Soft Rock
+  "easy listening": Soft Rock
+  "piano rock": Piano Rock
+  metal: Metal
+  "heavy metal": Metal
+  "death metal": Metal
+  "black metal": Metal
+  "thrash metal": Metal
+  "doom metal": Metal
+  metalcore: Metal
+  "nu metal": Metal
+  "progressive metal": Metal
+  "power metal": Metal
+  "industrial metal": Metal
+  "symphonic metal": Metal
+  "alternative metal": Metal
+  punk: Punk
+  "punk rock": Punk
+  "hardcore punk": Punk
+  "anarcho punk": Punk
+  "ska punk": Punk
+  "street punk": Punk
+  "garage punk": Punk
+
+  # --- Other ---
+  blues: Blues
+  "electric blues": Blues
+  "delta blues": Blues
+  "chicago blues": Blues
+  "country blues": Blues
+  "blues rock": Blues
+  reggae: Reggae
+  dancehall: Reggae
+  "modern dancehall": Reggae
+  "roots reggae": Reggae
+  dub: Reggae
+  ska: Reggae
+  "lovers rock": Reggae
+  "lo-fi": Lo-Fi
+  lofi: Lo-Fi
+  "lo fi": Lo-Fi
+  "lofi hip hop": Lo-Fi
+  "lofi hip-hop": Lo-Fi
+  "lo-fi house": Lo-Fi
+  chillhop: Lo-Fi
+  country: Country
+  "country pop": Country
+  "country rock": Country
+  "alternative country": Country
+  americana: Country
+  bluegrass: Country
+  "contemporary country": Country
+  "traditional country": Country
+  "honky-tonk": Country
+  "honky tonk": Country
+  outlaw: Country
+  "outlaw country": Country
+  jazz: Jazz
+  bebop: Jazz
+  "big band": Jazz
+  "smooth jazz": Jazz
+  "cool jazz": Jazz
+  "hard bop": Jazz
+  "jazz fusion": Jazz
+  fusion: Jazz
+  "latin jazz": Jazz
+  "vocal jazz": Jazz
+  swing: Jazz
+  dixieland: Jazz
+  "free jazz": Jazz
+  "acid jazz": Jazz
+  "nu jazz": Jazz
+  classical: Classical
+  baroque: Classical
+  "baroque era": Classical
+  "classical era": Classical
+  "romantic era": Classical
+  "modern era": Classical
+  opera: Classical
+  orchestral: Classical
+  "chamber music": Classical
+  "solo piano": Classical
+  choral: Classical
+  cantata: Classical
+  "classical crossover": Classical
+  folk: Folk
+  "contemporary folk": Folk
+  "traditional folk": Folk
+  "folk rock": Folk
+  "folk-rock": Folk
+  "indie folk": Folk
+  "singer-songwriter": Folk
+  "singer/songwriter": Folk
+  "freak folk": Folk
+  "anti-folk": Folk
+  christian: Christian / Gospel
+  gospel: Christian / Gospel
+  "christian rock": Christian / Gospel
+  "christian pop": Christian / Gospel
+  "christian rap": Christian / Gospel
+  "christian metal": Christian / Gospel
+  "christian hip-hop": Christian / Gospel
+  "contemporary christian": Christian / Gospel
+  ccm: Christian / Gospel
+  "praise & worship": Christian / Gospel
+  worship: Christian / Gospel
+  praise: Christian / Gospel
+  spiritual: Christian / Gospel
+  devotional: Christian / Gospel
+  inspirational: Christian / Gospel
+  "southern gospel": Christian / Gospel
+  "traditional gospel": Christian / Gospel
+  "contemporary gospel": Christian / Gospel
+  "christian & gospel": Christian / Gospel
+  acoustic: Acoustic
+  "acoustic version": Acoustic
+  unplugged: Acoustic
+  stripped: Acoustic
+  "acoustic cover": Acoustic
+  latin: Latin
+  "latin pop": Latin
+  "pop in spanish": Latin
+  "regional mexicano": Latin
+  "regional mexican": Latin
+  salsa: Latin
+  "salsa y tropical": Latin
+  "contemporary latin": Latin
+  mariachi: Latin
+  ranchera: Latin
+  "bossa nova": Latin
+  mpb: Latin
+  world: World
+  worldwide: World
+  worldbeat: World
+  "world music": World
+  celtic: World
+  flamenco: World
+  tango: World
+  klezmer: World
+  cumbia: World
+  "indian pop": World
+  bollywood: World
+  "indian classical": World
+  sufi: World
+  calypso: World
+  soca: World
+  soundtrack: Soundtrack
+  "movie soundtrack": Soundtrack
+  "tv soundtrack": Soundtrack
+  "video game": Soundtrack
+  "video game music": Soundtrack
+  "original score": Soundtrack
+  score: Soundtrack
+  musicals: Soundtrack
+  broadway: Soundtrack
+
+  # --- Specials ---
+  acapella: Acapellas
+  "a cappella": Acapellas
+  acappella: Acapellas
+  acapellas: Acapellas
+  vocals: Acapellas
+  "vocal only": Acapellas
+  "dj tools": DJ Tools
+  "dj tool": DJ Tools
+  drumloop: DJ Tools
+  "drum loop": DJ Tools
+  tools: DJ Tools
+  podcast: Non-Music
+  podcasts: Non-Music
+  audiobook: Non-Music
+  audiobooks: Non-Music
+  comedy: Non-Music
+  "stand-up": Non-Music
+  standup: Non-Music
+  kids: Non-Music
+  "children's music": Non-Music
+  "spoken word": Non-Music
+  "sound effects": Non-Music
+  "sound effect": Non-Music
+  noise: Non-Music

@@ -1,0 +1,77 @@
+# Apple Music tag-to-genre mappings.
+#
+# Apple-specific subgenres from the iTunes music genre list (the codes
+# spreadsheet Pioneer maintains in iTunes Connect). Generic short names
+# already live in generic.yaml; this file covers Apple's distinctive
+# subgenre labels that wouldn't otherwise route correctly.
+#
+# Source: Apple Music Style Guide / iTunes Connect genre codes (2026).
+
+version: 1
+source: Apple
+
+mappings:
+  # Pop subgenres Apple ships
+  "adult contemporary": Pop
+  "pop/rock": Pop
+  "operatic pop": Pop
+  "traditional pop": Pop
+
+  # Pre-2000 pop indicators
+  "new wave": Pop (80s/90s)
+
+  # Apple's Rock subgenres not covered by generic
+  "american trad rock": Rock
+  "jam bands": Rock
+  "adult alternative": Alternative Rock
+
+  # Apple lumps all metal into Rock — we split it out
+  "death metal/black metal": Metal
+  "hair metal": Metal
+
+  # Apple's Country subgenres
+  "contemporary bluegrass": Country
+  "traditional bluegrass": Country
+  "urban cowboy": Country
+
+  # R&B/Soul as Apple groups it
+  "r&b/soul": R&B / Soul
+
+  # Hip-Hop variants
+  "hip-hop/rap": Hip-Hop
+  "alternative rap": Hip-Hop
+  "hardcore rap": Hip-Hop
+  "underground rap": Hip-Hop
+
+  # Apple's Dance section maps in here for what we don't have elsewhere
+  "jungle/drum'n'bass": Drum & Bass
+
+  # Apple's Easy Listening lumps lounge/swing — most useful as Soft Rock
+  # for the easy-listening side, Jazz for the swing side. Default Soft.
+  lounge: Soft Rock
+
+  # Apple's Vocal
+  "vocal pop": Pop
+  standards: Jazz
+
+  # Children's / Comedy / Spoken Word — non-music
+  "children's music": Non-Music
+  lullabies: Non-Music
+  "sing-along": Non-Music
+  stories: Non-Music
+  novelty: Non-Music
+  "standup comedy": Non-Music
+
+  # Apple's Worldwide regional cluster
+  "celtic folk": World
+  "contemporary celtic": World
+  "traditional celtic": World
+
+  # Apple's R&B/Soul → Funk split
+  "minneapolis sound": Funk
+  "deep funk": Funk
+  "synth-funk": Funk
+
+  # Apple's Christian & Gospel subgenres
+  "classic christian": Christian / Gospel
+  "praise & worship": Christian / Gospel
