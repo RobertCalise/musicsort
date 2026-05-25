@@ -1,0 +1,40 @@
+# Bandcamp tag-to-genre mappings.
+#
+# Bandcamp uses a flat list of ~28 top-level genres on track / album pages.
+# Most map cleanly to our buckets via generic.yaml; this file pins the
+# Bandcamp-literal strings (with slashes, lowercase) so the provenance is
+# explicit and adding/removing Bandcamp tags is a single-file change.
+#
+# Source: https://bandcamp.com/tags  (2026-05)
+
+version: 1
+source: Bandcamp
+
+mappings:
+  electronic: Electronica
+  rock: Rock
+  metal: Metal
+  alternative: Alternative Rock
+  "hip-hop/rap": Hip-Hop
+  experimental: Ambient / Experimental
+  punk: Punk
+  folk: Folk
+  pop: Pop
+  ambient: Ambient / Experimental
+  soundtrack: Soundtrack
+  world: World
+  jazz: Jazz
+  acoustic: Acoustic
+  funk: Funk
+  "r&b/soul": R&B / Soul
+  devotional: Christian / Gospel
+  classical: Classical
+  reggae: Reggae
+  podcasts: Non-Music
+  country: Country
+  "spoken word": Non-Music
+  comedy: Non-Music
+  blues: Blues
+  kids: Non-Music
+  audiobooks: Non-Music
+  latin: Latin
