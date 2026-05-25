@@ -69,9 +69,9 @@ def test_new_file_with_recognized_genre_is_moved(
         db=db,
         quarantiner=quarantiner,
     )
-    assert (
-        result.action is MoveAction.MOVED
-    ), f"expected MOVED but got {result.action.value} ({result.reason}: {result.detail})"
+    assert result.action is MoveAction.MOVED, (
+        f"expected MOVED but got {result.action.value} ({result.reason}: {result.detail})"
+    )
     assert result.dst is not None
     assert result.dst.parent == settings.songs_dir / "House"
     assert result.dst.exists()
@@ -261,9 +261,9 @@ def test_better_quality_incoming_replaces_existing(setup, encode_mp3, tmp_path: 
         db=db,
         quarantiner=quarantiner,
     )
-    assert (
-        result.action is MoveAction.REPLACED
-    ), f"expected REPLACED but got {result.action.value} ({result.reason}: {result.detail})"
+    assert result.action is MoveAction.REPLACED, (
+        f"expected REPLACED but got {result.action.value} ({result.reason}: {result.detail})"
+    )
     assert result.dst == existing  # incoming takes existing's path
     assert result.dst.exists()
     assert (settings.quarantine_dir / "duplicate" / "shared.mp3").exists()
@@ -283,9 +283,9 @@ def test_worse_quality_incoming_loses(setup, encode_mp3, tmp_path: Path) -> None
         db=db,
         quarantiner=quarantiner,
     )
-    assert (
-        result.action is MoveAction.QUARANTINED
-    ), f"expected QUARANTINED but got {result.action.value} ({result.reason}: {result.detail})"
+    assert result.action is MoveAction.QUARANTINED, (
+        f"expected QUARANTINED but got {result.action.value} ({result.reason}: {result.detail})"
+    )
     assert result.reason == "worse_quality"
     assert result.dst is not None
     assert result.dst.parent == settings.quarantine_dir / "duplicate"
