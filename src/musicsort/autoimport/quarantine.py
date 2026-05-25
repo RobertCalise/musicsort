@@ -26,6 +26,7 @@ class QuarantineReason(StrEnum):
     UNREADABLE = "unreadable"
     NO_GENRE = "no_genre"
     UNKNOWN_GENRE = "unknown_genre"
+    MISSING_YEAR = "missing_year"
     MANUAL_ONLY = "manual_only"
     AMBIGUOUS = "ambiguous"
     DUPLICATE = "duplicate"

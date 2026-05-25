@@ -228,7 +228,9 @@ def playlists(
     }
 
     with RekordboxWriter(
-        master_db=settings.rekordbox_master_db_path,
+        # Use the resolved master_db so the writer and the backup above always
+        # target the same DB file (override may be None → autodetect).
+        master_db=master_db,
         playlist_parent=settings.rekordbox_playlist_parent,
         genres_folder=settings.rekordbox_genres_folder,
         decades_folder=settings.rekordbox_decades_folder,

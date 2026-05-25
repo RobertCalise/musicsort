@@ -339,11 +339,15 @@ def _best_fingerprint_match(
 
 def _reason_for_match(kind: MatchKind, match_reason: str) -> QuarantineReason:
     if kind is MatchKind.UNMATCHED:
-        return (
-            QuarantineReason.NO_GENRE
-            if match_reason == "no genre tag"
-            else QuarantineReason.UNKNOWN_GENRE
-        )
+        if match_reason == "no genre tag":
+            return QuarantineReason.NO_GENRE
+        # The categorizer formats year-gated misses as "...matches year-gated
+        # categor{y,ies} ... but year tag is missing". Route those to their
+        # own subfolder so the user knows to add a year tag rather than chase
+        # the genre.
+        if "year-gated" in match_reason:
+            return QuarantineReason.MISSING_YEAR
+        return QuarantineReason.UNKNOWN_GENRE
     if kind is MatchKind.MANUAL_ONLY:
         return QuarantineReason.MANUAL_ONLY
     return QuarantineReason.AMBIGUOUS

@@ -14,7 +14,7 @@ For each file that arrives in the watched folder:
 4. **Quality compare** on fingerprint matches — `(codec_lossless, bitrate, sample_rate, channels, size)` tuple comparison. Better encoding wins, displaces the worse one to quarantine.
 5. **Route** to `Songs/<Genre>/`, or quarantine to `_Unsorted/<reason>/` if any step fails (no genre tag, unknown genre, ambiguous, manual-only, unreadable, duplicate, worse-quality).
 
-Outcomes are recorded in a JSONL audit log (`_Unsorted/unsorted.log`) and a fingerprint cache (`_Unsorted/.musicsort/fingerprints.db`).
+Outcomes are recorded in a JSONL audit log (`_Unsorted/unsorted.log`) and a fingerprint + Rekordbox-queue cache (`<library_root>/.musicsort/fingerprints.db`).
 
 ## Install
 
@@ -90,15 +90,20 @@ See `.env.example` for the full list. Drop a `.env` at the repo root to override
 
 ## Taxonomy
 
-Genre-to-folder routing rules live in `src/musicsort/autoimport/taxonomy.yaml`. Each category declares aliases (tag strings that route there) plus optional `when:` clauses for disambiguation. Year-based disambiguation handles cases like `Pop` (routes to `Pop_80s_90s` if year < 2000, else `Pop_Modern`).
+Genre-to-folder routing rules are split across two layers:
 
-Edit the YAML to add categories or aliases for your library; reload by restarting the watcher.
+- `src/musicsort/autoimport/genres.yaml` — the category catalog. Each category declares its canonical name, target folder, optional `family` (for Rekordbox sidebar grouping), optional `when:` clause (e.g. year predicates), and the source-keyed alias mappings it accepts.
+- `src/musicsort/autoimport/genres/{generic,beatport,apple,bandcamp}.yaml` — per-source alias dictionaries. A category opts into a source's alias by referencing the dictionary key under that source. Aliases may be a single string or a list of strings; the same dictionary key can appear under multiple categories when a `when:` clause splits them by year (e.g. `Pop` vs. `Pop (80s/90s)` both consume the `pop` alias and the year predicate picks the winner).
+
+Year-based disambiguation routes a tag like `Pop` to `Pop_80s_90s` when year < 2000 and to `Pop_Modern` otherwise. Files tagged with a year-gated alias but missing a year tag land in `_Unsorted/missing_year/` so the fix (add a year tag) is obvious.
+
+Edit the YAML to add categories or aliases for your library; reload by restarting the watcher. See [docs/taxonomy.md](docs/taxonomy.md) for the matching rules and contribution guide.
 
 ## Limitations / non-goals
 
-- **macOS-only for the service commands.** The routing/dedup library code is cross-platform; the LaunchAgent install/uninstall is macOS-specific.
+- **macOS-only for the service commands and the Rekordbox integration.** The routing/dedup library code is cross-platform; the LaunchAgent install/uninstall and the `rekordbox` subcommands are macOS-specific (pyrekordbox + Rekordbox 6/7's encrypted `master.db`).
 - **No-genre files don't auto-route.** Tracks without an ID3 genre tag land in `_Unsorted/no_genre/`. AcoustID/MusicBrainz lookup as a fallback is a planned future feature; for now, retag manually.
-- **No Rekordbox / Serato / Traktor integration.** musicsort organizes files on disk. DJ software is downstream.
+- **No Serato / Traktor integration.** musicsort routes files on disk and, optionally, into Rekordbox's collection + playlists (see `musicsort rekordbox --help`). Serato/Traktor are out of scope.
 - **No GUI.** CLI only.
 
 ## Development

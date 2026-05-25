@@ -69,6 +69,11 @@ class RekordboxWriter:
         self._family_folders: dict[str, DjmdPlaylist] = {}
         self._genre_playlists: dict[str, DjmdPlaylist] = {}
         self._decade_playlists: dict[str, DjmdPlaylist] = {}
+        # Per-playlist set of member content IDs. Lazily populated on first
+        # `add_track_to_playlist` for a given playlist so we don't pay the full
+        # `get_playlist_contents(...).all()` materialization on every track
+        # during a bulk `rekordbox playlists` sync (was O(N) per add).
+        self._playlist_member_ids: dict[str, set[str]] = {}
 
     def __enter__(self) -> Self:
         if self._master_db_path is not None:
@@ -183,13 +188,20 @@ class RekordboxWriter:
         """Append `content` to `playlist` if not already there.
 
         Returns True if the track was newly added, False if it was
-        already a member of the playlist (idempotent).
+        already a member of the playlist (idempotent). Membership is
+        looked up against a per-playlist cache of content IDs, lazily
+        populated on first call — avoids O(members) materialization on
+        every add during a bulk `rekordbox playlists` sync.
         """
         db = self._require_open()
-        existing = db.get_playlist_contents(playlist).all()
-        if any(c.ID == content.ID for c in existing):
+        members = self._playlist_member_ids.get(playlist.ID)
+        if members is None:
+            members = {c.ID for c in db.get_playlist_contents(playlist).all()}
+            self._playlist_member_ids[playlist.ID] = members
+        if content.ID in members:
             return False
         db.add_to_playlist(playlist, content)
+        members.add(content.ID)
         return True
 
     # ------------------------------------------------------------------
@@ -220,6 +232,7 @@ class RekordboxWriter:
         self._family_folders.clear()
         self._genre_playlists.clear()
         self._decade_playlists.clear()
+        self._playlist_member_ids.clear()
 
     # ------------------------------------------------------------------
     # Internals

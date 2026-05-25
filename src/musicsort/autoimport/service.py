@@ -78,7 +78,7 @@ def install() -> None:
     Idempotent: if already loaded, unloads first, then loads the freshly
     written plist."""
     if sys.platform != "darwin":
-        raise ServiceError("install-service is macOS-only")
+        raise ServiceError("`musicsort install` is macOS-only")
 
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     PLIST_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -107,7 +107,7 @@ def install() -> None:
 def uninstall() -> None:
     """Stop and unregister the watcher LaunchAgent; delete the plist file."""
     if sys.platform != "darwin":
-        raise ServiceError("uninstall-service is macOS-only")
+        raise ServiceError("`musicsort uninstall` is macOS-only")
 
     subprocess.run(
         ["launchctl", "bootout", _gui_target(), str(PLIST_PATH)],

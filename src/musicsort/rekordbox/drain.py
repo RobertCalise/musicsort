@@ -95,7 +95,9 @@ def drain(
     failed: list[tuple[Path, str]] = []
     rekordbox_opened_mid_drain = False
 
-    with RekordboxWriter(master_db=settings.rekordbox_master_db_path) as writer:
+    # Pass the resolved master_db (not the raw override, which may be None) so the
+    # writer and the backup above always target the same database file.
+    with RekordboxWriter(master_db=master_db) as writer:
         for row in pending:
             try:
                 outcome = writer.import_track(row.library_path)

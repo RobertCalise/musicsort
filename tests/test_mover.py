@@ -145,6 +145,40 @@ def test_unknown_genre_quarantines(setup, audio_fixtures: dict[str, Path], tmp_p
     assert result.reason == "unknown_genre"
 
 
+def test_year_gated_genre_without_year_routes_to_missing_year(
+    setup, audio_fixtures: dict[str, Path], tmp_path: Path
+) -> None:
+    """A tag whose categories are all year-gated lands in
+    `_Unsorted/missing_year/` so the user knows the fix is adding a year tag,
+    not chasing the genre. The `pop` alias maps to both `Pop` (year_gte: 2000)
+    and `Pop (80s/90s)` (year_lt: 2000) — with no year tag, both are
+    year-blocked."""
+    settings, taxonomy, db, quarantiner = setup
+    src = tmp_path / "year_less_pop.mp3"
+    src.write_bytes(audio_fixtures["mp3_empty"].read_bytes())
+    m = MP3(src)
+    if m.tags is None:
+        m.add_tags()
+    from mutagen.id3 import TCON
+
+    m.tags.add(TCON(encoding=3, text="Pop"))
+    # Deliberately no TDRC — that's the trigger for this code path.
+    m.save()
+    incoming = _drop_into_autoimport(src, settings.autoimport_folder)
+
+    result = move_one(
+        incoming,
+        settings=settings,
+        taxonomy=taxonomy,
+        db=db,
+        quarantiner=quarantiner,
+    )
+    assert result.action is MoveAction.QUARANTINED
+    assert result.reason == "missing_year"
+    assert result.dst is not None
+    assert result.dst.parent == settings.quarantine_dir / "missing_year"
+
+
 def test_manual_only_genre_quarantines(
     setup, audio_fixtures: dict[str, Path], tmp_path: Path
 ) -> None:
